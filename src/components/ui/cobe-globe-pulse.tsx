@@ -143,7 +143,6 @@ export function GlobePulse({
           key={m.id}
           style={{
             position: "absolute",
-            // @ts-expect-error CSS Anchor Positioning
             positionAnchor: `--cobe-${m.id}`,
             bottom: "anchor(center)",
             left: "anchor(center)",

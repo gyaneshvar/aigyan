@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo, useRef } from "react"
 import { GlobePulse } from "@/components/ui/cobe-globe-pulse"
-import { Sparkles, TerminalSquare, Rss, ArrowRight, Sun, Moon, ExternalLink, Cpu, Search, X, Command } from "lucide-react"
+import { TerminalSquare, Rss, ArrowRight, Sun, Moon, ExternalLink, Cpu, Search, X } from "lucide-react"
 
 interface NewsItem {
   id: string;
