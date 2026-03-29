@@ -166,7 +166,7 @@ function App() {
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-lg overflow-hidden flex items-center justify-center p-1 border"
                   style={{ background: isDark ? "#000" : "#f4f4f5", borderColor: "var(--border)", boxShadow: `0 0 15px color-mix(in srgb, var(--neon) 20%, transparent)` }}>
-                  <img src="/logo.png" alt="AI Gyan"
+                  <img src="logo.png" alt="AI Gyan"
                     className={"w-full h-full object-contain " + (isDark ? "filter invert opacity-90" : "opacity-90")}
                     onError={(e) => { e.currentTarget.style.display = 'none' }} />
                 </div>
