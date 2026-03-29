@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Instrument Serif", serif;
+  --font-sans: "Outfit", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+/* ─── DARK MODE (default) ─── */
+:root {
+  --bg: #030303;
+  --surface: #0c0c0c;
+  --border: #1f1f1f;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #52525b;
+  --neon: #00f0ff;
+  --neon-alt: #ff003c;
+  --card-bg: rgba(12, 12, 12, 0.8);
+  --header-bg: rgba(0,0,0,0.6);
+  --grid-color: rgba(255,255,255,0.04);
+  --tag-bg: #000000;
+  --tag-border: #1f1f1f;
+}
+
+/* ─── LIGHT MODE ─── */
+.light {
+  --bg: #f5f5f0;
+  --surface: #ffffff;
+  --border: #e4e4e7;
+  --text-primary: #09090b;
+  --text-secondary: #52525b;
+  --text-muted: #a1a1aa;
+  --neon: #0284c7;
+  --neon-alt: #e11d48;
+  --card-bg: rgba(255,255,255,0.9);
+  --header-bg: rgba(245,245,240,0.8);
+  --grid-color: rgba(0,0,0,0.05);
+  --tag-bg: #f4f4f5;
+  --tag-border: #e4e4e7;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  letter-spacing: 0.025em;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Grid background pattern */
+.bg-grid {
+  background-image: linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+                    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-500 { animation-delay: 500ms; }
+
+/* theme-aware helpers */
+.c-bg      { background-color: var(--bg); }
+.c-surface { background-color: var(--surface); }
+.c-border  { border-color: var(--border); }
+.c-text    { color: var(--text-primary); }
+.c-muted   { color: var(--text-muted); }
+.c-secondary { color: var(--text-secondary); }
+.c-neon    { color: var(--neon); }
+.c-neon-alt { color: var(--neon-alt); }
+.b-neon    { border-color: var(--neon); }
+.c-card    { background-color: var(--card-bg); }
+.c-header  { background-color: var(--header-bg); }
+
+::selection {
+  background-color: color-mix(in srgb, var(--neon) 30%, transparent);
+}
