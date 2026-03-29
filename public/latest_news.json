@@ -1,0 +1,86 @@
+{
+  "last_updated": "2026-03-29T11:37:52.439547+00:00Z",
+  "date": "2026-03-29",
+  "items": [
+    {
+      "id": "824fdc66a0c3b61d",
+      "title": "Anthropic Accidentally Exposes Unreleased AI Model and Internal Data",
+      "source": "Palo Alto Today, The Times of India",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFGOnn_legt_DO08RZqgyfixZic0p7ao78huDvfDQqhBppZC9HDnEEbGIKAoVNxOfDE5hluYbRElTCD49tWOqp8hhdgggYyNTrJwTdVgmmHTBOm23zIlweA3Vyhk3Av-tTtUu0IkMToxijqI1ctul61QnYu0gV1mxeG8g88FAyc7HUumiW89sUKM_YpWZQ4nJ54FhixB2p6wx09wvXRPEV5FcGX597d8PG7nL-p3lkLHfLUvLlv5T0x0Bs=",
+      "published_at": "2026-03-28",
+      "dev_summary": "Anthropic inadvertently exposed an unreleased AI model along with sensitive internal data. This incident highlights the importance of robust data security measures in AI development environments.",
+      "casual_summary": "Anthropic, a major AI company, accidentally leaked an unreleased AI model and some internal data. This mishap underscores the need for better data protection practices in tech companies.",
+      "tags": [
+        "#Anthropic",
+        "#AITool",
+        "#Security",
+        "#Trending"
+      ],
+      "score": 9
+    },
+    {
+      "id": "120a06abb5c51a4f",
+      "title": "Mistral AI Releases Voxtral TTS: A 4B Open-Weight Streaming Speech Model for Low-Latency Multilingual Voice Generation",
+      "source": "MarkTechPost, AI Business",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEX7Gz1e8P-_B6pvKpmKAX8KyJg4DYCbDbJyqbpq_PWaHKtmXt53w03nbqRcq8eq1bSOITaMbsBAvxfW1zegvco84Dmf6L99fJ1EUC1pEjlbmVbrkYDJlD7WeSKr3rIrv6f9p1Fld3Gs9r1oWoaeZIVKMVxJsgkUKl2rWW5qe6ApkXMQhF5uLJ9AruXmwX93veCf4PGHPwYboW2A604dd-kBKW7etWCtApPvQhQY62BUlvdZsOnprJohPbxv7UrRt3rQFn_A-EhgieW3oXkOuM9v0lBOThjIOMPVA==",
+      "published_at": "2026-03-28",
+      "dev_summary": "Mistral AI has launched Voxtral TTS, a 4 billion parameter open-weight model designed for low-latency multilingual voice generation. This model supports streaming speech applications and enhances real-time voice synthesis capabilities.",
+      "casual_summary": "Mistral AI has introduced Voxtral TTS, a new speech model that can generate voices in multiple languages with minimal delay. This technology could improve voice assistants and other speech-based applications.",
+      "tags": [
+        "#Mistral",
+        "#NewModel",
+        "#AITool",
+        "#MultiModal"
+      ],
+      "score": 8
+    },
+    {
+      "id": "9866839c45fbc25e",
+      "title": "US District Judge Blocks Government Ban on Anthropic AI",
+      "source": "JURIST - News, YouTube (Daily AI News)",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFjpG7NA39vRcux0xBZCF_sFYVzHxWCaUDiBPkzkMWijNgnxCekffMyfB7_5mT6XBJPXeP_uFjCwAb8XsVHs6oOCDPKth7_9bpLNUSYqjSliA7wA_uN0ImewZBPTKCc4YXTrjONeMk4Wzc_Q_dKccUlBC0cV9WAf29KDnWfKH_U0nd3QUAgu7gEPjIRSrEy4rybvIJdcCXm",
+      "published_at": "2026-03-28",
+      "dev_summary": "A US District Judge has blocked a government attempt to ban Anthropic AI, citing concerns over innovation and competition. This ruling emphasizes the legal complexities surrounding AI regulation.",
+      "casual_summary": "A judge has stopped the government from banning Anthropic AI, arguing that such a ban could harm innovation. This decision highlights the ongoing debate over how to regulate AI technologies.",
+      "tags": [
+        "#Anthropic",
+        "#Policy",
+        "#Legal",
+        "#Trending"
+      ],
+      "score": 8
+    },
+    {
+      "id": "bcac4044d3fd4ca3",
+      "title": "OpenAI Pulls the Plug on Sora, the Viral AI Video App",
+      "source": "Associated Press, PCMag",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHeFvCg7agY0dt6m1F7VJ9HVn3V52tUqCVbaK8ipVIweLKbN0yOzCHzEgr19_sKNku929Vm2Bftx7WvYf-2dsisGDgaqWUvnrGwJVTM9bZNK4GRZOI_39_EzLUVNcVqzYHHsdF79hGGyoah1BpT8EoQXeognwMB17rhAKBCIhTsZHLutr-xo56zsEIeP0Is5yMwRFSKLYxE6AGXHsKp8dKhaFIySnSQwm3SP8gMwwCd16aNQbCh5oRptd_ZadQk8ys=",
+      "published_at": "2026-03-28",
+      "dev_summary": "OpenAI has discontinued Sora, a popular AI video application, due to strategic shifts in their product lineup. This decision reflects OpenAI's focus on optimizing resource allocation for core projects.",
+      "casual_summary": "OpenAI has decided to shut down Sora, a widely-used AI video app, as part of a strategic realignment. This move indicates a shift in OpenAI's priorities towards other projects.",
+      "tags": [
+        "#OpenAI",
+        "#AITool",
+        "#Productivity",
+        "#Trending"
+      ],
+      "score": 7
+    },
+    {
+      "id": "2f9db63450916e5a",
+      "title": "White House Releases National AI Policy Framework, Aims to Preempt State Laws",
+      "source": "KPBS, DLA Piper",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHshFcxlgVUEsbo9ryxkZA3KoYReAUnM-hN6rXDoWT_RzgAwxJvgA3NfzGL2qHkcpyAcAKfZx2Nhlbtt_MyGa4US4aqHlQK5ga2s-9Wx2qUBNslNczNH2bAP1vJqDmEbnePVMqCw9SO8k76idiG7hEl2a1tCVrRAzSp_D2EIOzl4Iv1pU-RjX8Izs47X8i-73HhvjC812O1YpfIfl5DSETag1z0UFgQuNm3azS9Eel3NgSMvd9y2AEva8DWvD8OED9d",
+      "published_at": "2026-03-28",
+      "dev_summary": "The White House has unveiled a national AI policy framework designed to unify AI regulations across states. This framework aims to streamline AI development and deployment by providing consistent guidelines.",
+      "casual_summary": "The White House has introduced a new AI policy framework to create uniform regulations across the country. This initiative seeks to simplify the rules for AI companies operating in different states.",
+      "tags": [
+        "#Policy",
+        "#AITool",
+        "#Government",
+        "#Trending"
+      ],
+      "score": 9
+    }
+  ]
+}
