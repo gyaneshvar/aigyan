@@ -26,7 +26,7 @@ function App() {
   const toggle = () => setIsDark(d => !d)
 
   useEffect(() => {
-    fetch("/latest_news.json")
+    fetch("latest_news.json")
       .then(res => res.json())
       .then(data => {
         setNews(data.items || [])
