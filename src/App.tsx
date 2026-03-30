@@ -1,6 +1,15 @@
 import { useState, useEffect, useMemo, useRef } from "react"
 import { GlobePulse } from "@/components/ui/cobe-globe-pulse"
-import { TerminalSquare, Rss, ArrowRight, Sun, Moon, ExternalLink, Cpu, Search, X } from "lucide-react"
+import { TerminalSquare, Rss, ArrowRight, Sun, Moon, ExternalLink, Cpu, Search, X, Wrench, BookOpen, Globe } from "lucide-react"
+import ResourcesGrid, { type ResourcesData } from "@/components/ResourcesGrid"
+
+function YoutubeIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+    </svg>
+  )
+}
 
 interface NewsItem {
   id: string;
@@ -18,7 +27,10 @@ function App() {
   const [isDark, setIsDark] = useState(true)
   const [news, setNews] = useState<NewsItem[]>([])
   const [loading, setLoading] = useState(true)
-  const [viewMode, setViewMode] = useState<"dev" | "casual">("dev")
+  const [activePage, setActivePage] = useState<"news" | "resources">("news")
+  const [resources, setResources] = useState<ResourcesData | null>(null)
+  const [resourcesLoading, setResourcesLoading] = useState(false)
+  const [resourcesLoaded, setResourcesLoaded] = useState(false)
   const [showSearch, setShowSearch] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   
@@ -38,6 +50,24 @@ function App() {
       })
   }, [])
 
+  // Fetch resources (lazy — only when first visiting Resources page)
+  useEffect(() => {
+    if (activePage === "resources" && !resourcesLoaded) {
+      setResourcesLoading(true)
+      fetch("resources.json")
+        .then(res => res.json())
+        .then(data => {
+          setResources(data)
+          setResourcesLoaded(true)
+          setResourcesLoading(false)
+        })
+        .catch(err => {
+          console.error("Failed to fetch resources:", err)
+          setResourcesLoading(false)
+        })
+    }
+  }, [activePage, resourcesLoaded])
+
   // Derived filtered news
   const filteredNews = useMemo(() => {
     if (!searchQuery.trim()) return news
@@ -48,6 +78,44 @@ function App() {
       item.tags.some(t => t.toLowerCase().includes(q))
     )
   }, [news, searchQuery])
+
+  // Filtered resources for search modal
+  const filteredResources = useMemo(() => {
+    if (!resources || !searchQuery.trim()) return []
+    const q = searchQuery.toLowerCase()
+    const regularItems = [
+      ...resources.ai_tools.map(i => ({ ...i, _category: "ai_tools" as const, _label: i.name })),
+      ...(resources.popular_skills ?? []).map(i => ({ ...i, _category: "popular_skills" as const, _label: i.name })),
+      ...(resources.powerful_websites ?? []).map(i => ({ ...i, _category: "powerful_websites" as const, _label: i.name })),
+    ]
+    const videoItems = (resources.youtube_videos ?? []).map(v => ({
+      ...v,
+      _category: "youtube_videos" as const,
+      _label: v.title,
+      name: v.title,
+    }))
+    const all = [...regularItems, ...videoItems]
+    return all.filter(
+      i =>
+        (i.name ?? "").toLowerCase().includes(q) ||
+        (i.description ?? "").toLowerCase().includes(q) ||
+        ((i as { channel?: string }).channel ?? "").toLowerCase().includes(q) ||
+        (i.tags ?? []).some(t => t.toLowerCase().includes(q))
+    )
+  }, [resources, searchQuery])
+
+  const CATEGORY_ICON: Record<string, React.ReactNode> = {
+    ai_tools: <Wrench className="w-3 h-3" />,
+    popular_skills: <BookOpen className="w-3 h-3" />,
+    powerful_websites: <Globe className="w-3 h-3" />,
+    youtube_videos: <YoutubeIcon className="w-3 h-3" />,
+  }
+  const CATEGORY_COLOR: Record<string, string> = {
+    ai_tools: "var(--neon)",
+    popular_skills: "var(--neon-alt)",
+    powerful_websites: "#a78bfa",
+    youtube_videos: "#ff0000",
+  }
 
   // Keyboard shortcut for search
   useEffect(() => {
@@ -99,36 +167,93 @@ function App() {
               </div>
               
               <div className="max-h-[60vh] overflow-y-auto p-4 custom-scrollbar">
-                <div className="px-2 py-4 border-b border-dashed mb-4" style={{ borderColor: "var(--border)" }}>
-                  <span className="text-[10px] font-mono uppercase tracking-[0.2em] font-bold" style={{ color: "var(--text-muted)" }}>
-                    {searchQuery ? `Filtering: ${filteredNews.length} matches found` : "Active Datastream Index"}
-                  </span>
-                </div>
-                
-                <div className="flex flex-col gap-2">
-                  {filteredNews.map((item, idx) => (
-                    <button 
-                      key={item.id || idx}
-                      onClick={() => {
-                        setShowSearch(false);
-                        const el = document.getElementById(`news-${item.id || idx}`);
-                        el?.scrollIntoView({ behavior: 'smooth' });
-                      }}
-                      className="group flex flex-col items-start p-4 hover:bg-white/5 text-left border border-transparent hover:border-[var(--border)] transition-all">
-                      <div className="flex justify-between w-full items-center mb-1">
-                        <span className="text-[10px] font-mono font-bold" style={{ color: "var(--neon)" }}>{item.source}</span>
-                        <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1" style={{ color: "var(--neon)" }} />
-                      </div>
-                      <span className="text-sm font-serif group-hover:text-[var(--neon)] transition-colors" style={{ color: "var(--text-primary)" }}>{item.title}</span>
-                    </button>
-                  ))}
-                  {filteredNews.length === 0 && (
-                    <div className="py-12 flex flex-col items-center gap-4">
-                      <TerminalSquare className="w-8 h-8 animate-pulse text-[var(--text-muted)]" />
-                      <span className="font-mono text-xs uppercase tracking-[0.2em]" style={{ color: "var(--text-muted)" }}>No matches in current intelligence sector.</span>
+                {/* News Results */}
+                {(filteredNews.length > 0 || !searchQuery) && (
+                  <>
+                    <div className="px-2 py-3 border-b border-dashed mb-3" style={{ borderColor: "var(--border)" }}>
+                      <span className="text-[10px] font-mono uppercase tracking-[0.2em] font-bold" style={{ color: "var(--text-muted)" }}>
+                        <Rss className="w-3 h-3 inline mr-1" />
+                        {searchQuery ? `News · ${filteredNews.length} matches` : "News Feed"}
+                      </span>
                     </div>
-                  )}
-                </div>
+                    <div className="flex flex-col gap-2 mb-4">
+                      {filteredNews.map((item, idx) => (
+                        <button 
+                          key={item.id || idx}
+                          onClick={() => {
+                            setShowSearch(false);
+                            setActivePage("news");
+                            setTimeout(() => {
+                              const el = document.getElementById(`news-${item.id || idx}`);
+                              el?.scrollIntoView({ behavior: 'smooth' });
+                            }, 100);
+                          }}
+                          className="group flex flex-col items-start p-4 hover:bg-white/5 text-left border border-transparent hover:border-[var(--border)] transition-all">
+                          <div className="flex justify-between w-full items-center mb-1">
+                            <span className="text-[10px] font-mono font-bold" style={{ color: "var(--neon)" }}>{item.source}</span>
+                            <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1" style={{ color: "var(--neon)" }} />
+                          </div>
+                          <span className="text-sm font-serif group-hover:text-[var(--neon)] transition-colors" style={{ color: "var(--text-primary)" }}>{item.title}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                )}
+
+                {/* Resources Results (only when search is active) */}
+                {searchQuery && (
+                  <>
+                    <div className="px-2 py-3 border-b border-dashed mb-3" style={{ borderColor: "var(--border)" }}>
+                      <span className="text-[10px] font-mono uppercase tracking-[0.2em] font-bold" style={{ color: "var(--text-muted)" }}>
+                        <Wrench className="w-3 h-3 inline mr-1" />
+                        Resources · {resources ? `${filteredResources.length} matches` : "not loaded"}
+                      </span>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      {filteredResources.map((item) => (
+                        <a
+                          key={`${item._category}-${item.id}`}
+                          href={item.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => setShowSearch(false)}
+                          className="group flex flex-col items-start p-4 hover:bg-white/5 text-left border border-transparent hover:border-[var(--border)] transition-all"
+                        >
+                          <div className="flex justify-between w-full items-center mb-1">
+                            <span className="flex items-center gap-1.5 text-[10px] font-mono font-bold" style={{ color: CATEGORY_COLOR[item._category] }}>
+                              {CATEGORY_ICON[item._category]}
+                              {item._category.replace(/_/g, " ")}
+                            </span>
+                            <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100" style={{ color: CATEGORY_COLOR[item._category] }} />
+                          </div>
+                          <span className="text-sm font-serif group-hover:opacity-80 transition-colors" style={{ color: "var(--text-primary)" }}>
+                            {(item as { icon?: string }).icon} {item.name}
+                          </span>
+                        </a>
+                      ))}
+                      {filteredResources.length === 0 && resources && (
+                        <p className="px-4 py-3 font-mono text-xs uppercase tracking-widest" style={{ color: "var(--text-muted)" }}>No resource matches.</p>
+                      )}
+                      {!resources && (
+                        <button
+                          onClick={() => { setShowSearch(false); setActivePage("resources"); }}
+                          className="px-4 py-3 font-mono text-xs uppercase tracking-widest text-left hover:opacity-70 transition-opacity"
+                          style={{ color: "var(--neon)" }}
+                        >
+                          → Visit Resources page to load resource index
+                        </button>
+                      )}
+                    </div>
+                  </>
+                )}
+
+                {/* Empty state */}
+                {searchQuery && filteredNews.length === 0 && filteredResources.length === 0 && (
+                  <div className="py-12 flex flex-col items-center gap-4">
+                    <TerminalSquare className="w-8 h-8 animate-pulse text-[var(--text-muted)]" />
+                    <span className="font-mono text-xs uppercase tracking-[0.2em]" style={{ color: "var(--text-muted)" }}>No matches in current intelligence sector.</span>
+                  </div>
+                )}
               </div>
               
               <div className="p-4 border-t flex justify-between items-center bg-black/20" style={{ borderColor: "var(--border)" }}>
@@ -178,22 +303,34 @@ function App() {
 
               {/* Nav */}
               <nav className="hidden md:flex justify-center">
-                <ul className="flex gap-4 items-center px-4 py-1.5 rounded-full border text-[10px] font-mono uppercase tracking-[0.12em] font-semibold"
+                <ul className="flex gap-1 items-center px-2 py-1.5 rounded-full border text-[10px] font-mono uppercase tracking-[0.12em] font-semibold"
                   style={{ background: isDark ? "rgba(0,0,0,0.5)" : "rgba(255,255,255,0.7)", borderColor: "var(--border)" }}>
+                  {/* News page toggle — only visible on news page */}
+
+
+                  {/* Page switcher */}
                   <li>
                     <button 
-                      onClick={() => setViewMode("dev")}
-                      style={{ color: viewMode === "dev" ? "var(--neon)" : "var(--text-muted)" }} 
-                      className="hover:opacity-70 transition-all px-3 py-1 rounded-full">
-                      Developer Specs
+                      onClick={() => setActivePage("news")}
+                      style={{ 
+                        color: activePage === "news" ? "var(--bg)" : "var(--text-muted)",
+                        background: activePage === "news" ? "var(--text-primary)" : "transparent"
+                      }} 
+                      className="flex items-center gap-1.5 hover:opacity-70 transition-all px-3 py-1 rounded-full">
+                      <Rss className="w-3 h-3" />
+                      News
                     </button>
                   </li>
                   <li>
                     <button 
-                      onClick={() => setViewMode("casual")}
-                      style={{ color: viewMode === "casual" ? "var(--neon-alt)" : "var(--text-muted)" }} 
-                      className="hover:opacity-70 transition-all px-3 py-1 rounded-full">
-                      Casual Feed
+                      onClick={() => setActivePage("resources")}
+                      style={{ 
+                        color: activePage === "resources" ? "var(--bg)" : "var(--text-muted)",
+                        background: activePage === "resources" ? "var(--neon)" : "transparent"
+                      }} 
+                      className="flex items-center gap-1.5 hover:opacity-70 transition-all px-3 py-1 rounded-full">
+                      <Wrench className="w-3 h-3" />
+                      Resources
                     </button>
                   </li>
                 </ul>
@@ -329,7 +466,23 @@ function App() {
               </div>
             </div>
 
+            {/* Resources Page */}
+            {activePage === "resources" && (
+              <div className="w-full pt-20 border-t animate-fade-in-up" style={{ borderColor: "var(--border)" }}>
+                <ResourcesGrid
+                  data={resources}
+                  loading={resourcesLoading}
+                  searchQuery={searchQuery}
+                  onTagClick={(tag) => {
+                    setShowSearch(true)
+                    setSearchQuery(tag)
+                  }}
+                />
+              </div>
+            )}
+
             {/* News Feed Section */}
+            {activePage === "news" && (
             <div id="feed-start" className="w-full pt-20 border-t" style={{ borderColor: "var(--border)" }}>
               <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                 <div>
@@ -337,18 +490,7 @@ function App() {
                   <p className="font-mono text-xs uppercase tracking-[0.3em] font-bold" style={{ color: "var(--text-muted)" }}>{new Date().toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}</p>
                 </div>
                 
-                <div className="flex items-center gap-4 p-1 rounded-sm border" style={{ borderColor: "var(--border)", background: "var(--surface)" }}>
-                  <button 
-                    onClick={() => setViewMode("dev")}
-                    className={"px-4 py-2 text-[10px] font-mono uppercase tracking-widest font-bold transition-all " + (viewMode === 'dev' ? 'bg-[var(--text-primary)] text-[var(--bg)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]')}>
-                    Dev Specs
-                  </button>
-                  <button 
-                    onClick={() => setViewMode("casual")}
-                    className={"px-4 py-2 text-[10px] font-mono uppercase tracking-widest font-bold transition-all " + (viewMode === 'casual' ? 'bg-[var(--text-primary)] text-[var(--bg)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]')}>
-                    Casual
-                  </button>
-                </div>
+
               </div>
 
               {loading ? (
@@ -365,7 +507,7 @@ function App() {
                       className="group relative flex flex-col p-8 transition-all duration-500 overflow-hidden"
                       style={{ background: "var(--card-bg)" }}>
                       <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity">
-                        <Cpu className="w-12 h-12" style={{ color: viewMode === 'dev' ? "var(--neon)" : "var(--neon-alt)" }} />
+                        <Cpu className="w-12 h-12" style={{ color: "var(--neon)" }} />
                       </div>
                       
                       <div className="flex justify-between items-center mb-6">
@@ -382,9 +524,23 @@ function App() {
                         {item.title}
                       </h3>
 
-                      <p className="text-sm font-mono leading-relaxed mb-8 flex-grow" style={{ color: "var(--text-secondary)" }}>
-                        {viewMode === "dev" ? item.dev_summary : item.casual_summary}
-                      </p>
+                      <div className="flex flex-col gap-4 flex-grow mb-8">
+                        <p className="text-sm font-mono leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                          {item.casual_summary}
+                        </p>
+                        
+                        {item.dev_summary && (
+                          <div className="p-4 bg-black/20 border-l border-[var(--neon)] rounded-sm group/dev hover:bg-black/40 transition-colors">
+                            <span className="text-[9px] font-mono font-bold uppercase tracking-widest block mb-2 opacity-50 flex items-center gap-1.5" style={{ color: "var(--neon)" }}>
+                              <Cpu className="w-3 h-3" />
+                              Technical Breakdown
+                            </span>
+                            <p className="text-[11px] font-mono leading-relaxed opacity-80" style={{ color: "var(--text-secondary)" }}>
+                              {item.dev_summary}
+                            </p>
+                          </div>
+                        )}
+                      </div>
 
                       <div className="flex flex-wrap gap-2 mb-8">
                         {item.tags?.map(tag => (
@@ -422,6 +578,7 @@ function App() {
                 </div>
               )}
             </div>
+            )}
 
             <footer className="w-full py-20 mt-20 border-t flex flex-col md:flex-row justify-between items-center gap-10" style={{ borderColor: "var(--border)" }}>
               <div className="flex flex-col items-center md:items-start">
@@ -429,9 +586,10 @@ function App() {
                 <span className="font-mono text-xs uppercase tracking-widest mt-2" style={{ color: "var(--text-muted)" }}>Intelligence, Simplified.</span>
               </div>
               <div className="flex gap-10 font-mono text-[10px] uppercase tracking-widest font-bold">
+                <button onClick={() => setActivePage("news")} style={{ color: "var(--text-muted)" }} className="hover:text-[var(--neon)]">News Feed</button>
+                <button onClick={() => setActivePage("resources")} style={{ color: "var(--text-muted)" }} className="hover:text-[var(--neon)]">Resources</button>
                 <a href="#" style={{ color: "var(--text-muted)" }} className="hover:text-[var(--neon)]">Twitter</a>
                 <a href="#" style={{ color: "var(--text-muted)" }} className="hover:text-[var(--neon)]">Newsletter</a>
-                <a href="#" style={{ color: "var(--text-muted)" }} className="hover:text-[var(--neon)]">API docs</a>
               </div>
             </footer>
           </main>

@@ -1,0 +1,309 @@
+{
+  "version": "1.0",
+  "updated_at": "2026-03-30",
+  "ai_tools": [
+    {
+      "id": "suno",
+      "name": "Suno",
+      "description": "Generate full songs — vocals, instruments, lyrics — from a text prompt in seconds. Suno v4 produces radio-quality tracks across any genre.",
+      "link": "https://suno.com",
+      "icon": "🎵",
+      "tags": [
+        "Music",
+        "Creative",
+        "Audio"
+      ],
+      "featured": false
+    },
+    {
+      "id": "hex",
+      "name": "Hex",
+      "description": "Open-source macOS app that transcribes your voice and pastes it anywhere — instantly. Press-and-hold a hotkey, speak, release. Powered by Parakeet TDT v3 & WhisperKit. Fast, multilingual, runs on-device.",
+      "link": "https://github.com/kitlangton/Hex",
+      "icon": "🎙️",
+      "tags": [
+        "Voice",
+        "Transcription",
+        "macOS",
+        "Open Source",
+        "Productivity"
+      ],
+      "featured": true
+    },
+    {
+      "id": "drawpen",
+      "name": "DrawPen",
+      "description": "Free, open-source screen annotation tool. Draw, highlight, and annotate on top of any screen in real-time — perfect for live coding sessions, AI demos, presentations, and remote meetings.",
+      "link": "https://drawpen.app",
+      "icon": "✏️",
+      "tags": [
+        "Annotation",
+        "Productivity",
+        "Open Source",
+        "Presentations",
+        "Free"
+      ],
+      "featured": false
+    },
+    {
+      "id": "napkin-ai",
+      "name": "Napkin AI",
+      "description": "Turn text into visual diagrams instantly. Paste or type your content and Napkin's AI auto-generates charts, flowcharts, and infographics for business storytelling. No design skills needed.",
+      "link": "https://www.napkin.ai",
+      "icon": "🗒️",
+      "tags": [
+        "Diagrams",
+        "Visual AI",
+        "Storytelling",
+        "Creative"
+      ],
+      "featured": true
+    },
+    {
+      "id": "gamma",
+      "name": "Gamma",
+      "description": "AI-powered platform to create stunning presentations, documents, and webpages in minutes. Enter a prompt and Gamma generates a full deck with layout, content, and design. Export to PDF, PPTX, or share as a live link.",
+      "link": "https://gamma.app",
+      "icon": "⚡",
+      "tags": [
+        "Presentations",
+        "AI Writing",
+        "Design",
+        "Productivity"
+      ],
+      "featured": true
+    },
+    {
+      "id": "hotpot-ai",
+      "name": "Hotpot.ai",
+      "description": "All-in-one AI image editor. Remove backgrounds, restore old photos, colorize images, upscale resolution, and generate AI art. Simple, fast, and no design skills required.",
+      "link": "https://hotpot.ai",
+      "icon": "🖼️",
+      "tags": [
+        "Image Editing",
+        "AI Art",
+        "Creative",
+        "Free"
+      ],
+      "featured": false
+    },
+    {
+      "id": "remusic-vocal-remover",
+      "name": "Remusic — AI Vocal Remover",
+      "description": "Separate vocals from any song in seconds. Extract instrumentals, isolate lead vocals, drums, and bass tracks using AI. Great for karaoke, remixes, and music production.",
+      "link": "https://remusic.ai/ai-vocal-remover",
+      "icon": "🎤",
+      "tags": [
+        "Music",
+        "Audio",
+        "AI",
+        "Creative"
+      ],
+      "featured": false
+    },
+    {
+      "id": "kimi-slides",
+      "name": "Kimi Slides",
+      "description": "AI-powered PPT generator by Moonshot AI. Describe your topic and Kimi creates a full presentation with structured slides, visuals, and content — in seconds.",
+      "link": "https://www.kimi.com/en/slides",
+      "icon": "📊",
+      "tags": [
+        "Presentations",
+        "AI Writing",
+        "PPT",
+        "Productivity"
+      ],
+      "featured": false
+    },
+    {
+      "id": "text-behind-image",
+      "name": "Text Behind Image",
+      "description": "Create the viral 'text behind image' effect instantly. Upload a photo, type your text, and the tool intelligently places it behind subjects in the image for a stunning depth effect.",
+      "link": "https://textbehindimage.com",
+      "icon": "🖋️",
+      "tags": [
+        "Image Editing",
+        "Design",
+        "Creative",
+        "Viral"
+      ],
+      "featured": false
+    },
+    {
+      "id": "infographics-so",
+      "name": "Infographics.so",
+      "description": "Generate beautiful, data-rich infographics from text or data in seconds using AI. Perfect for reports, social media, and presentations without hiring a designer.",
+      "link": "https://infographics.so",
+      "icon": "📈",
+      "tags": [
+        "Infographics",
+        "Visual AI",
+        "Design",
+        "Data"
+      ],
+      "featured": false
+    }
+  ],
+  "popular_skills": [
+    {
+      "id": "claude-frontend-design-skill",
+      "name": "Claude Frontend Design Skill",
+      "description": "Anthropic's official Claude Code skill for generating production-grade, visually distinctive frontends. Teaches bold aesthetic thinking — typography, color, motion, spatial composition — and avoids generic 'AI slop' patterns. Used by 18k+ agents.",
+      "link": "https://github.com/anthropics/claude-code/blob/main/plugins/frontend-design/skills/frontend-design/SKILL.md",
+      "icon": "🎨",
+      "tags": ["Claude Code", "Frontend", "Design", "AI Agents", "Anthropic"],
+      "featured": true
+    },
+    {
+      "id": "skills-sh",
+      "name": "skills.sh — Agent Skills Directory",
+      "description": "The open registry for AI agent skills. Discover, install, and share reusable capabilities for Claude, Copilot, and other agents with a single `npx skills add` command. 90k+ total installs. Top skills include frontend-design, RAG, prompt engineering, and more.",
+      "link": "https://skills.sh",
+      "icon": "🧩",
+      "tags": ["AI Agents", "Skills", "Open Source", "Claude", "Ecosystem"],
+      "featured": true
+    }
+  ],
+  "powerful_websites": [
+    {
+      "id": "modal",
+      "name": "Modal",
+      "description": "Serverless cloud compute for AI workloads. Run Python functions on GPUs at scale with zero infrastructure management. Perfect for AI agents and batch jobs.",
+      "link": "https://modal.com",
+      "icon": "☁️",
+      "tags": [
+        "Infrastructure",
+        "GPU",
+        "Serverless"
+      ],
+      "featured": false
+    },
+    {
+      "id": "21st-dev",
+      "name": "21st.dev",
+      "description": "Open-source registry of production-ready UI components + Agents SDK to ship AI-powered products faster. Browse, copy, and integrate animated components built for the agentic web. Think npm for UI, but with live previews.",
+      "link": "https://21st.dev",
+      "icon": "🧱",
+      "tags": ["UI Components", "Open Source", "AI Agents", "Developer Tool", "React"],
+      "featured": true
+    },
+    {
+      "id": "removepaywall",
+      "name": "Remove Paywall",
+      "description": "Bypass paywalls on news articles and websites instantly. Just paste the URL and read any article for free — no subscriptions, no signups. Supports most major publications.",
+      "link": "https://www.removepaywall.com",
+      "icon": "🔓",
+      "tags": [
+        "Utility",
+        "Reading",
+        "Free",
+        "Productivity"
+      ],
+      "featured": true
+    },
+    {
+      "id": "archive-buttons",
+      "name": "Archive Buttons",
+      "description": "One-click access to archived versions of any webpage via the Wayback Machine, Archive.today, and more. Never lose a webpage to link rot again.",
+      "link": "https://www.archivebuttons.com",
+      "icon": "📦",
+      "tags": [
+        "Utility",
+        "Archive",
+        "Research",
+        "Productivity"
+      ],
+      "featured": false
+    },
+    {
+      "id": "cart-art",
+      "name": "Cart-Art",
+      "description": "Turn any image into ASCII or pixel art, right in your browser. A fun creative tool for developers who love text-based aesthetics.",
+      "link": "https://cart-art.vercel.app",
+      "icon": "🎨",
+      "tags": [
+        "Creative",
+        "Art",
+        "Developer Tool",
+        "Free"
+      ],
+      "featured": false
+    },
+    {
+      "id": "rasterbator",
+      "name": "Rasterbator",
+      "description": "Turn any image into a massive multi-page poster you can print and assemble. Upload a photo, choose the size, and download a PDF ready for printing on standard paper.",
+      "link": "https://rasterbator.net",
+      "icon": "🖨️",
+      "tags": [
+        "Print",
+        "Design",
+        "Creative",
+        "Free"
+      ],
+      "featured": false
+    },
+    {
+      "id": "y2doc",
+      "name": "Y2Doc — YouTube to Document",
+      "description": "Convert any YouTube video into a clean, structured document or article. Great for summarising long lectures, podcasts, or tutorials into readable notes.",
+      "link": "https://y2doc.com",
+      "icon": "📄",
+      "tags": [
+        "YouTube",
+        "Productivity",
+        "AI",
+        "Learning"
+      ],
+      "featured": true
+    },
+    {
+      "id": "vcc-generator",
+      "name": "VCC Generator",
+      "description": "Generate test credit card numbers for development and QA purposes. Useful when building and testing payment flows without using real card data.",
+      "link": "https://www.vccgenerator.org",
+      "icon": "💳",
+      "tags": [
+        "Developer Tool",
+        "Testing",
+        "Utility",
+        "Finance"
+      ],
+      "featured": false
+    }
+  ],
+  "youtube_videos": [
+    {
+      "id": "how-i-use-llms",
+      "video_id": "EWvNQjAaOHw",
+      "title": "How I use LLMs",
+      "channel": "Andrej Karpathy",
+      "description": "Andrej Karpathy (ex-OpenAI, Tesla AI) shares his personal workflow for using large language models effectively. A must-watch for anyone building with or learning about LLMs.",
+      "link": "https://www.youtube.com/watch?v=EWvNQjAaOHw",
+      "thumbnail": "https://img.youtube.com/vi/EWvNQjAaOHw/maxresdefault.jpg",
+      "tags": [
+        "LLMs",
+        "Workflow",
+        "Karpathy",
+        "Beginner Friendly"
+      ],
+      "featured": true
+    },
+    {
+      "id": "agentic-workflows-course",
+      "video_id": "MxyRjL7NG18",
+      "title": "Agentic Workflows (6hr full course)",
+      "channel": "Nick Saraev",
+      "description": "A comprehensive 6-hour deep dive into building agentic workflows from scratch. Covers agent architectures, tool use, planning, and real-world automation patterns.",
+      "link": "https://www.youtube.com/watch?v=MxyRjL7NG18",
+      "thumbnail": "https://img.youtube.com/vi/MxyRjL7NG18/maxresdefault.jpg",
+      "tags": [
+        "Agents",
+        "Automation",
+        "Full Course",
+        "Advanced"
+      ],
+      "featured": true
+    }
+  ]
+}
